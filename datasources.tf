@@ -42,19 +42,27 @@ resource "random_string" "deploy_id" {
 
 # Image lookup
 data "oci_core_images" "oraclelinux7" {
-  compartment_id = var.compartment_ocid
-  operating_system = "Oracle Linux"
-  operating_system_version = "7.9"
-  filter {
-    name = "display_name"
-    values = ["^([a-zA-z]+)-([a-zA-z]+)-([\\.0-9]+)-([\\.0-9-]+)$"]
-    regex = true
-  }
+  compartment_id           = var.compartment_ocid
+  shape                    = var.instance_shape
+  operating_system         = "Oracle Linux"
+  operating_system_version = 8
+  sort_by                  = "TIMECREATED"
+  sort_order               = "DESC"
+#   shape                  = var.image_shape
+#   state                  = var.image_state
 }
 
-locals { 
+# data "oci_core_images" "all_images" {
+#   compartment_id = var.compartment_ocid
+#   operating_system = "Oracle Linux"
+#   operating_system_version = "7.9"
+#   # Add other filters or parameters as needed
+# }
+
+locals {
   bastion_subnet = var.public_edge_node ? module.network.edge-id : module.network.private-id
   is_oke_public = var.cluster_endpoint_config_is_public_ip_enabled ? module.network.edge-id : module.network.private-id
+#   latest_oraclelinux7_image_id = data.oci_core_images.oraclelinux7.images[0].id
 }
 
 data "oci_containerengine_cluster_option" "latestclusterversion" {

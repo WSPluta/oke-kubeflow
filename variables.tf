@@ -88,7 +88,7 @@ variable "cluster_name" {
 
 variable "kubernetes_version" {
   # Kubernetes Version v1.22+ is not yet supported by Kubeflow
-  default = "v1.21.5"
+  default = "v1.25.4"
 }
 
 variable "kubeflow_node_pool_name" {
@@ -202,4 +202,28 @@ variable "is_node_pool_shape" {
   default     = "1" # Only used if flex shape is selected
   description = "Default is to use E3 Flex"
 
+}
+
+# variable "ssh_public_key" {
+#   description = "SSH public key used for authentication"
+#   type        = string
+# }
+
+# variable "network_compartment_ocid" {
+#   description = "Compartment OCID for the network resources"
+#   type        = string
+# }
+
+# variable "compute_compartment_ocid" {
+#   description = "Compartment OCID for compute resources"
+#   type        = string
+# }
+
+# variable "availability_domain_number" {
+#   description = "Availability Domain number"
+#   type        = string
+# }
+
+variable "instance_shape" {
+    default = "VM.Standard.E3.Flex"
 }

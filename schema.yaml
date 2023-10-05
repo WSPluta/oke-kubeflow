@@ -94,9 +94,9 @@ variables:
   kubernetes_version:
     type: enum
     enum:
-    - "v1.21.5"
-    - "v1.20.11"
-    - "v1.20.8"
+    - "v1.27.2"
+    - "v1.26.7"
+    - "v1.25.12"
     title: "Kubernetes Version"
     description: "Choose the version of Kubernetes to deploy"
     required: true
